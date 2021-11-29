@@ -28,3 +28,45 @@ def big_latin(word='')
     main.join + front.join + 'ay'
 
 end
+
+def sentence_to_pig_latin(sentence="")
+    words = sentence.split(' ')
+    array = words.map do |word|
+        word_no_punct = remove_punctuation(word)
+        pig_latin(word_no_punct)
+    end
+    array.join(' ').capitalize + '.'
+end
+
+def remove_punctuation(word="")
+    punct = '.,;:!?'.split('')
+    if punct.include?(word[-1,1])
+        word.chop!
+    end
+    word
+end
+
+def display_intro
+    puts "\n>> Pig Latin Translator <<\n\n"
+    puts "Type phrases to translate after each prompt."
+    puts "Type 'quit' to exit."
+    puts
+  end
+  
+  def pig_latin_translator
+    display_intro
+    loop do
+      print "translate: "
+      input = gets.chomp
+      if input == 'quit'
+        exit!
+      else
+        puts sentence_to_pig_latin(input)
+        puts
+      end
+    end
+  end
+  
+  # Launch the translator
+  pig_latin_translator
+  
